@@ -1,0 +1,7 @@
+<% jurisdiction_display = "India" %>
+<% if @agency.jurisdiction == 1 %>
+<%		jurisdiction_display = "City of " + @agency.city %>
+<% elsif @agency.jurisdiction == 2 %>
+<% 		jurisdiction_display = "State of " + @agency.state %>
+<% end %>
+Government of <%= jurisdiction_display %> <br/>

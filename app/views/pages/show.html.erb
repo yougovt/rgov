@@ -1,0 +1,21 @@
+<table class="profile" summary="Profile information">
+  <tr>
+    <td class="main">
+      <h1>
+        <%= @agency.orgname %>
+      </h1>
+      <%= render 'jurisdiction' %><br />
+      <strong>Functions:</strong> <br/>
+      <%= @agency.function %><br/><br/>
+      
+      <%= link_to 'Edit page', edit_page_path(@agency) %>
+    </td>
+    <td class="sidebar round">
+      <% if @agency.external_url? %>
+      	<%=	link_to 'Website', @agency.external_url %>
+      <% else %> 
+      	<%= link_to 'Add URL', edit_page_path(@agency) %>
+      <% end %> <br />
+    </td>
+  </tr>
+</table>

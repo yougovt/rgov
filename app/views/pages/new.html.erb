@@ -1,0 +1,28 @@
+<h1>Add a government agency or government supported company</h1>
+
+<%= form_for(@agency) do |f| %>
+  <%= render 'shared/error_messages', :object => f.object %>
+  <div class="field">
+    <%= f.label :orgname, "Department" %><br />
+    <%= f.text_field :orgname %>
+  </div>
+  <div class="field">
+    <%= f.label :jurisdiction %><br />
+    <%= f.select( :jurisdiction, { "City agency" => "1", "State agency" => "2", "National agency" => "3"}) %>
+  </div>
+  <div class="field">
+    <%= f.label :city %><br />
+    <%= f.text_field :city %>
+  </div>
+  <div class="field">
+    <%= f.label :state %><br />
+    <%= f.text_field :state %>
+  </div>  
+  <div class="field">
+    <%= f.label :function %><br />
+    <%= f.text_area :function %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Add" %>
+  </div>
+<% end %>

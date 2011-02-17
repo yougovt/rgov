@@ -10,7 +10,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110215090252) do
+ActiveRecord::Schema.define(:version => 20110217032915) do
+
+  create_table "pages", :force => true do |t|
+    t.string   "orgname"
+    t.integer  "jurisdiction"
+    t.string   "city"
+    t.string   "state"
+    t.text     "function"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "external_url"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "name"
