@@ -15,6 +15,11 @@ class PagesController < ApplicationController
     @title = "Help"
   end
   
+  def index
+    @title = "All agencies"
+    @pages = Page.paginate(:page => params[:page])
+  end
+  
   def show
     @agency = Page.find(params[:id])
     @title = @agency.orgname

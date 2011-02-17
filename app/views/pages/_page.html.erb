@@ -1,0 +1,8 @@
+<li>
+  <%= link_to page.orgname, page %>
+  <% if current_user.admin? %>
+  | <%= link_to "delete", page, :method => :delete, :confirm => "You sure?",
+                                :title => "Delete #{page.orgname}" %>
+  <% end %>
+  
+</li>

@@ -3,7 +3,7 @@
 }
 
 body {
-  background: #cff;
+  background: #C1CDCD;
 }
 
 header {
@@ -195,4 +195,8 @@ ul.users {
 
 .users li {
   list-style: none;
+}
+
+.emphasis {
+font-family:georgia;
 }
