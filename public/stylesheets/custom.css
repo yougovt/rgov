@@ -200,3 +200,69 @@ ul.users {
 .emphasis {
 font-family:georgia;
 }
+
+
+h1.service {
+  margin-bottom: 0.3em;
+}
+
+table.services {
+  margin-top: 1em;
+}
+
+table.services tr {
+  height: 70px;
+}
+
+table.services tr td.gravatar {
+  border-top: 1px solid #ccc;
+  vertical-align: top;
+  width: 50px;
+}
+
+table.services tr td.service {
+  border-top: 1px solid #ccc;
+  vertical-align: top;
+  padding-top: 10px;
+}
+
+table.services tr td.delete {
+  border-top: 1px solid #ccc;
+  vertical-align: top;
+}
+
+table.services tr td.service span.timestamp {
+  display: block;
+  font-size: 85%;
+  color: #666;
+}
+
+div.user_info img {
+  padding-right: 0.1em;
+}
+
+div.user_info a {
+  text-decoration: none;
+}
+
+div.user_info span.user_name {
+  position: absolute;
+}
+
+div.user_info span.services {
+  font-size: 80%;
+}
+
+form.new_service {
+  margin-bottom: 2em;
+}
+
+form.new_service textarea {
+  height: 4em;
+  margin-bottom: 0;
+}
+
+.delete a {
+  font-size: 45%;
+  color: #FF9999;
+}

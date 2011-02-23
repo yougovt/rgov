@@ -15,7 +15,11 @@
 #
 
 class Page < ActiveRecord::Base
+		
 	attr_accessible :orgname, :jurisdiction, :city, :state, :function, :external_url
+	has_many :services, :dependent => :destroy
+	accepts_nested_attributes_for :services, :reject_if => lambda { |a| a[:content].blank? }, :allow_destroy => true
+	
 	validates :orgname, :presence => true
 	validates :city, :presence => true, :if => :is_city_agency?
 	validates :state, :presence => true, :if => :is_state_agency?

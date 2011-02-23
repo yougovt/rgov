@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110217032915) do
+ActiveRecord::Schema.define(:version => 20110223000935) do
 
   create_table "pages", :force => true do |t|
     t.string   "orgname"
@@ -22,6 +22,17 @@ ActiveRecord::Schema.define(:version => 20110217032915) do
     t.datetime "updated_at"
     t.string   "external_url"
   end
+
+  create_table "services", :force => true do |t|
+    t.string   "name"
+    t.string   "external_link"
+    t.string   "desc"
+    t.integer  "page_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "services", ["page_id"], :name => "index_services_on_page_id"
 
   create_table "users", :force => true do |t|
     t.string   "name"

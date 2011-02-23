@@ -1,0 +1,2 @@
+page.insert_html :bottom, :services, :partial => 'service', :object => @service
+page[:add_service_form].reset

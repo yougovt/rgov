@@ -1,21 +1,52 @@
 <table class="profile" summary="Profile information">
   <tr>
     <td class="main">
-      <h1>
-        <%= @agency.orgname %>
-      </h1>
-      <%= render 'jurisdiction' %><br />
-      <strong>Functions:</strong> <br/>
-      <%= @agency.function %><br/><br/>
+      <h1><%= @agency.orgname %></h1>
       
-      <%= link_to 'Edit page', edit_page_path(@agency) %>
-    </td>
-    <td class="sidebar round">
+      <%= render 'jurisdiction' %>
+      
+      <div id="external_link">
       <% if @agency.external_url? %>
-      	<%=	link_to 'Website', @agency.external_url %>
+      	<%=	link_to @agency.external_url, @agency.external_url %>
       <% else %> 
       	<%= link_to 'Add URL', edit_page_path(@agency) %>
-      <% end %> <br />
+      <% end %> <br><br />
+      </div>
+      
+      
+      <h3>Functions:</h3>
+      <%= simple_format(@agency.function) %>
+      <br/>
+      
+      <div>
+      <h3>Services:</h3>
+	  <% unless @existing_services.empty? %>
+	  	<table id = "services" class="services" summary="User services">
+          	<%= render @existing_services %>
+        </table>
+      <% end %>
+      </div>
+		
+	  <h3>Add a service:</h3>
+      <% form_for :service, :remote => true, :html => { :id => "add_service_form" } do |f| %>
+      	<%= f.hidden_field :page_id, :value => @agency.id %>
+      	<label for="name">Service:</label><br />
+      	<%= f.text_field :name %><br />
+      	<label for="external_link">Link:</label><br />
+      	<%= f.text_field :external_link %><br />
+      	<label for="desc">Description (optional):</label><br />
+      	<%= f.text_area :desc %>
+		<p><%= submit_tag 'Add Service' %></p>
+	  <% end %>
+		
+      <%= link_to 'Edit page', edit_page_path(@agency) %>
+      
+      
+    </td>
+    <td class="sidebar round">
+		<h3>RTI menu</h3>
+		* RTI score <br />
+		* RTI filing button <br />
     </td>
   </tr>
 </table>

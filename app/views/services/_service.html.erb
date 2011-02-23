@@ -1,0 +1,13 @@
+<tr>
+  <td class="service">
+    <span class="content"><%= link_to service.name, service.external_link %></span>
+    <span class="timestamp"><%= service.desc %></span>
+  </td>
+  <% if current_user.admin? %>
+  <td class="delete">
+    <%= link_to "delete", service, :method => :delete,
+                                     :confirm => "You sure?",
+                                     :title => service.name %>
+  </td>
+  <% end %>
+</tr>

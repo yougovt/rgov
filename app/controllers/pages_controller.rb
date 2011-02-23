@@ -1,4 +1,5 @@
 class PagesController < ApplicationController
+
   def home
     @title = "Home"
   end
@@ -22,6 +23,8 @@ class PagesController < ApplicationController
   
   def show
     @agency = Page.find(params[:id])
+    @existing_services = @agency.services 
+	@service = Service.new
     @title = @agency.orgname
   end
 
