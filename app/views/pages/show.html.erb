@@ -28,7 +28,7 @@
       </div>
 		
 	  <h3>Add a service:</h3>
-      <% form_for :service, :remote => true, :html => { :id => "add_service_form" } do |f| %>
+      <% form_for @service, :remote => true, :html => { :id => "add_service_form" } do |f| %>
       	<%= f.hidden_field :page_id, :value => @agency.id %>
       	<label for="name">Service:</label><br />
       	<%= f.text_field :name %><br />
