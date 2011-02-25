@@ -1,10 +1,9 @@
-<script type="text/javascript">
 $(function() {
 
  	// Below is the name of the textfield that will be autocomplete   
     $('#query').autocomplete({
  		// This shows the min length of charcters that must be typed before the autocomplete looks for a match.
-    	minLength: 1,
+    	minLength: 2,
  		// This is the source of the auocomplete suggestions. In this case a list of agency names from the pages controller, in JSON format.
     	source: '<%= pages_path(:json) %>',
   		// This updates the textfield when you move the updown the suggestions list, with your keyboard. 
@@ -19,8 +18,6 @@ $(function() {
             $('#query').val(ui.item.page.orgname);
  			// and place the page.id into the hidden textfield called 'link_query'. 
         	$('#link_query').val(ui.item.page.id);
-        	var agencyURL = "pages/" + ui.item.page.id;
-        	window.location.href = agencyURL;
             return false;
         }
     })
@@ -28,22 +25,8 @@ $(function() {
     .data( "autocomplete" )._renderItem = function( ul, item ) {
             return $( "<li></li>" )
             .data( "item.autocomplete", item )
- 			// For now which just want to show the page.orgname in the list.
-            .append( "<a href=\"pages/" + item.page.id + "\">" + item.page.orgname + "</a>" )
+ 			// For now which just want to show the person.given_name in the list.
+            .append( "<a>" + item.page.orgname + "</a>" )
             .appendTo( ul );
         };
     });
-</script>
-
-
-<h1 align="center">Search government offices</h1>
-
-<p align="center">
-  <input class="tb7" id="query"/>
-  <input id="link_query" name="link[query]" type="hidden"/>
-</p>
-
-
-<p align="center">Didn't find the information you were looking for anywhere?</p>
-
-<%= link_to "File an RTI", root_path, :class => "signup_button round" %>

@@ -266,3 +266,15 @@ form.new_service textarea {
   font-size: 45%;
   color: #FF9999;
 }
+
+/* Add gradient to textbox*/
+.textbox {
+	width: 221px;
+	background: transparent url('/images/textbox_bg.jpg') no-repeat;
+	color : #747862;
+	height:20px;
+	border:0;
+	font-size:120%;
+	padding:4px 8px;
+	margin-bottom:0px;
+}

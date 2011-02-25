@@ -1,5 +1,8 @@
 class PagesController < ApplicationController
 
+  before_filter :authenticate, :only => [:edit, :update, :create, :new]
+  before_filter :admin_user,   :only => :destroy
+
   def home
     @title = "Home"
   end
@@ -18,7 +21,20 @@ class PagesController < ApplicationController
   
   def index
     @title = "All agencies"
-    @pages = Page.paginate(:page => params[:page])
+    # Handle autocomplete and normal page display differently
+    if params[:term]
+		# Limit the number of records assigned to @pages, by using the term value as a filter
+    	@pages = Page.find(:all,:conditions => ['orgname LIKE ?', "#{params[:term]}%"])	
+    else
+      	# For normal display on the pages/index page
+      	@pages = Page.paginate(:page => params[:page])
+    end
+    
+    respond_to do |format|
+    	format.html #index.html.erb
+    	format.json { render :json => @pages.to_json }
+    end
+    
   end
   
   def show
@@ -42,6 +58,12 @@ class PagesController < ApplicationController
       @title = "Add a new department"
       render 'new'
     end
+  end
+  
+  def destroy
+    Page.find(params[:id]).destroy
+    flash[:success] = "Agency deleted."
+    redirect_to pages_path
   end
   
   def edit
