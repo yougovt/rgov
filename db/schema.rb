@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110223000935) do
+ActiveRecord::Schema.define(:version => 20110225082734) do
 
   create_table "pages", :force => true do |t|
     t.string   "orgname"
@@ -21,6 +21,11 @@ ActiveRecord::Schema.define(:version => 20110223000935) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "external_url"
+    t.string   "leader"
+    t.string   "leader_title"
+    t.integer  "budget"
+    t.string   "budget_year"
+    t.integer  "rtiscore"
   end
 
   create_table "services", :force => true do |t|

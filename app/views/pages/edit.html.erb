@@ -24,6 +24,22 @@
     <%= f.text_field :external_url %>
   </div> 
   <div class="field">
+    <%= f.label :leader, 'Agency leader' %><br />
+    <%= f.text_field :leader %>
+  </div> 
+  <div class="field">
+    <%= f.label :leader_title, 'Designation' %><br />
+    <%= f.text_field :leader_title %>
+  </div> 
+  <div class="field">
+    <%= f.label :budget, 'Annual budget (in Rs)' %><br />
+    <%= f.text_field :budget %>
+  </div>   
+  <div class="field">
+    <%= f.label :budget_year, 'Budget year (Example: 2010-11)' %><br />
+    <%= f.text_field :budget_year %>
+  </div>   
+  <div class="field">
     <%= f.label :function %><br />
     <%= f.text_area :function %>
   </div>

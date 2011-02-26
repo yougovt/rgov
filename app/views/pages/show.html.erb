@@ -44,9 +44,27 @@
       
     </td>
     <td class="sidebar round">
-		<h3>RTI menu</h3>
-		* RTI score <br />
-		* RTI filing button <br />
+		<h3>Quick Facts</h3>
+		<% if (@agency.leader) %>
+			<strong>
+			<% if(@agency.leader_title) %>
+				<%= @agency.leader_title %> 
+			<% else %>
+				Leader
+			<% end %>
+			</strong><br />
+			<%= @agency.leader %><br />
+		<% else %>
+			<%= link_to 'Add leader', edit_page_path(@agency) %><br />
+		<% end %>
+		
+		<% if (@agency.budget) %>
+			<strong>Budget</strong><br />
+			Rs <%= (@agency.budget)/10000000 %> cr<br />
+		<% else %>
+			<%= link_to 'Add budget', edit_page_path(@agency) %><br />
+		<% end %>
+		<strong>RTI options</strong><br />
     </td>
   </tr>
 </table>
