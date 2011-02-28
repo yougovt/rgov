@@ -60,7 +60,7 @@
 		
 		<% if (@agency.budget) %>
 			<strong>Budget</strong><br />
-			Rs <%= (@agency.budget)/10000000 %> cr<br />
+			Rs <%= (@agency.budget) %> cr<br />
 		<% else %>
 			<%= link_to 'Add budget', edit_page_path(@agency) %><br />
 		<% end %>

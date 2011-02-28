@@ -42,6 +42,20 @@ class PagesController < ApplicationController
     @existing_services = @agency.services 
 	@service = Service.new
     @title = @agency.orgname
+    
+    prawnto :prawn => {
+      :page_size => 'A4',
+      :left_margin => 50,
+      :right_margin => 50,
+      :top_margin => 40,
+      :bottom_margin => 24}, 
+      :filename=>"#{@title.gsub(' ','_')}.pdf" 
+    
+   # respond_to do |format|
+   # 	format.html
+   # 	format.pdf
+   # end
+    
   end
 
   def new

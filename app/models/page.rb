@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110225082734
+# Schema version: 20110227211623
 #
 # Table name: pages
 #
@@ -14,9 +14,10 @@
 #  external_url :string(255)
 #  leader       :string(255)
 #  leader_title :string(255)
-#  budget       :integer
+#  budget       :float
 #  budget_year  :string(255)
 #  rtiscore     :integer
+#  rtiaddress   :string(255)
 #
 
 class Page < ActiveRecord::Base

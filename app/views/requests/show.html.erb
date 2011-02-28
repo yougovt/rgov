@@ -1,0 +1,22 @@
+      <h1>Verify your RTI request</h1>
+            
+      <div id="address">
+      <h3> Address: </h3>
+      <%= @request.first_name %>
+      <%= @request.last_name %><br />
+      <%= @request.street1 %><br />
+      <% unless (@request.street2.empty?) %>
+      	<%= @request.street2 %><br />
+	  <% end %>
+	  <%= @request.city %>, <%=@request.state %><br />
+	  PIN: <%= @request.pin %> <br /><br />
+	  </div>
+      
+      <div id="requested info">
+      <h3>Information request: </h3>
+      Subject: <%= @request.sub %> <br/><br />
+	  Body: <%= simple_format(@request.body) %> <br/>
+      </div>
+      
+      <%= link_to "Edit request", edit_request_path(@request)  %><br/><br/>
+      <%= link_to "Generate request for submission", request_path(@request)+'.pdf'  %>

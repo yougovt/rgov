@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110225082734) do
+ActiveRecord::Schema.define(:version => 20110227211623) do
 
   create_table "pages", :force => true do |t|
     t.string   "orgname"
@@ -23,9 +23,37 @@ ActiveRecord::Schema.define(:version => 20110225082734) do
     t.string   "external_url"
     t.string   "leader"
     t.string   "leader_title"
-    t.integer  "budget"
+    t.float    "budget"
     t.string   "budget_year"
     t.integer  "rtiscore"
+    t.string   "rtiaddress"
+  end
+
+  create_table "requests", :force => true do |t|
+    t.integer  "page_id"
+    t.integer  "user_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "street1"
+    t.string   "street2"
+    t.integer  "pin"
+    t.string   "city"
+    t.string   "district"
+    t.string   "state"
+    t.string   "email"
+    t.integer  "type"
+    t.string   "sub"
+    t.text     "body"
+    t.string   "serial_number"
+    t.integer  "payment_amount"
+    t.string   "payment_mode"
+    t.string   "payment_serial_number"
+    t.string   "payment_payable_at"
+    t.boolean  "verified"
+    t.boolean  "submitted"
+    t.datetime "submitdate"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "services", :force => true do |t|

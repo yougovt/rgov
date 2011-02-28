@@ -1,0 +1,33 @@
+<h1>File an RTI request online</h1>
+<%= form_for @request do |f| %>
+  <%= render 'shared/error_messages', :object => f.object %>
+
+  <div class="field">
+  	<%= f.label :page_id, "Select the department where you want to file:" %>
+    <%= f.text_field :page_id %>  
+  </div>
+
+  <div class="field">
+	First name: <%= f.text_field :first_name %><br /> 
+	Last Name:	<%= f.text_field :last_name %><br />
+    <%= f.label :street1, "Please enter your address" %> <br />
+    <%= f.text_field :street1 %><br />
+    <%= f.text_field :street2 %><br />
+    City or Town: <%= f.text_field :city %><br />
+    PIN Code: <%= f.text_field :pin %><br />
+    District (if needed): <%= f.text_field :district %><br />
+    State: <%= f.text_field :state %><br />
+  </div>
+  
+  <div class="field">
+  	<%= f.label :sub, "What kind of information are you requesting?" %> <br />
+    <%= f.text_field :sub %>  
+  </div>
+  <div class="field">
+  	<%= f.label :body, "Detailed questions:" %> <br />
+    <%= f.text_area :body %>  
+  </div>
+  <div class="actions">
+    <%= f.submit "Submit" %>
+  </div>
+<% end %>
