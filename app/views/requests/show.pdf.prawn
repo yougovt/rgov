@@ -2,7 +2,7 @@ pdf.text "Formal request filed under the Right to Information Act (2005)", :size
 pdf.move_down(30)
 
 pdf.text "Central Public Information Officer (CPIO)" 
-pdf.text "#{@request.page_id}"
+pdf.text "#{@agency.orgname}"
 pdf.move_down(15)
 
 pdf.text "Dear Madam or Sir:"

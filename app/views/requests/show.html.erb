@@ -1,7 +1,38 @@
-      <h1>Verify your RTI request</h1>
-            
+<table class="profile" summary="Show RTI request">
+  <tr>
+    <td class="main">
+      <h1>Your RTI request has been submitted</h1>
+       
+       <p>Congratulations! Your RTI request has been added to our queue. </p>
+       <p class="small">You can review your request below and download it for your records. 
+       You will receive an email from us once we have submitted your request to the concerned government department.</p>
+       
+        <script type='text/javascript' src='http://www.scribd.com/javascripts/view.js'></script>
+
+		<div id='embedded_flash'><a href="http://www.scribd.com">Scribd</a></div>
+		
+		<script type="text/javascript">
+		var scribd_doc = scribd.Document.getDoc(50231986, 'key-pcseqd598ncggzkuhdj');
+		
+		var oniPaperReady = function(e){
+		// scribd_doc.api.setPage(3);
+		}
+		
+		scribd_doc.addParam( 'jsapi_version', 1 );
+		scribd_doc.addEventListener( 'iPaperReady', oniPaperReady );
+		scribd_doc.write( 'embedded_flash' );
+		</script>
+      
+      <br/>
+      
+      <div id="requested info">
+      <h3 class = "content">Information request: </h3>
+      Subject: <%= @request.sub %> <br/><br />
+	  Body: <%= simple_format(@request.body) %> <br/>
+      </div>
+      
       <div id="address">
-      <h3> Address: </h3>
+      <h3 class = "content"> Address: </h3>
       <%= @request.first_name %>
       <%= @request.last_name %><br />
       <%= @request.street1 %><br />
@@ -11,12 +42,20 @@
 	  <%= @request.city %>, <%=@request.state %><br />
 	  PIN: <%= @request.pin %> <br /><br />
 	  </div>
-      
-      <div id="requested info">
-      <h3>Information request: </h3>
-      Subject: <%= @request.sub %> <br/><br />
-	  Body: <%= simple_format(@request.body) %> <br/>
-      </div>
-      
-      <%= link_to "Edit request", edit_request_path(@request)  %><br/><br/>
-      <%= link_to "Generate request for submission", request_path(@request)+'.pdf'  %>
+
+      <%= link_to "Download request letter for your records", request_path(@request)+'.pdf'  %>
+    </td>
+    
+    <td class="sidebar round">
+		<h3>Status</h3>
+		
+		Request submitted on: <br/>
+		<strong><%= @request.created_at.strftime("%d %b %Y") %> <br/>
+		<% appealdate = @request.created_at + 35.days %></strong>
+		<% from_time = Time.now %><br />
+		First appeal can be filed in 
+		<strong><%= distance_of_time_in_words( from_time , appealdate, false ) %></strong> 
+    </td>
+  
+  </tr>
+</table>

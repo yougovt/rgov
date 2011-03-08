@@ -1,7 +1,16 @@
 class RequestsController < ApplicationController
   
+  
+  
   def new
     @request = Request.new
+    @pages = Page.all
+    @pages.sort! { |a,b| a.orgname.downcase <=> b.orgname.downcase }
+    if signed_in? 
+    	@request.email = current_user.email
+    	@request.first_name = current_user.name
+    	@request.last_name = current_user.name
+    end	
     @title = "File an RTI request online"
   end
   
@@ -9,10 +18,12 @@ class RequestsController < ApplicationController
     @request = Request.new(params[:request])
     #need to build email verification here for non-signed in users
     if @request.save 
-      flash[:success] = "Request added to queue!"
-      redirect_to @request
+      flash[:success] = "Successfully created new request! But wait, you aren't done yet..."
+      redirect_to edit_request_path(@request)
     else
       @title = "File an RTI request online"
+      @pages = Page.all
+      @pages.sort! { |a,b| a.orgname.downcase <=> b.orgname.downcase }
       render 'new'
     end
   end
@@ -52,13 +63,24 @@ class RequestsController < ApplicationController
   
   def update
     @request = Request.find(params[:id])
-    if @request.update_attributes(params[:page])
-      flash[:success] = "Request added to queue!"
-      redirect_to @request
+    if @request.update_attributes(params[:request])
+      flash[:success] = "Your RTI request has been updated!"
+      redirect_to edit_request_path(@request)
     else
+      flash[:notice] = "Please correct the errors below."
       @title = "Edit your RTI request..."
       render 'edit'
     end
   end 
+  
+  def upload(request)
+  	Scribd::API.instance.key = '6r2zurc4lhjgovi2czrt3'
+	Scribd::API.instance.secret = 'sec-2as20tof0tzq23jklykcws2wqc'
+	Scribd::User.login 'info@yougovt.in', 'govster'
+	
+	doc = Scribd::Document.upload(:file => '/pages/#{request.id}.pdf', :access => 'private')
+	
+  end
+
 
 end

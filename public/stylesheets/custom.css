@@ -4,6 +4,7 @@
 
 body {
   background: #C1CDCD;
+  color: #616161;
 }
 
 header {
@@ -24,6 +25,19 @@ section {
 
 section h1 {
   font-size: 200%;
+}
+
+.content {
+	font-family: arial;
+	font-size: 125%;
+	background: #BCD2EE;
+	color: #363636;
+	/*font-weight: bold;*/
+}
+
+.small {
+	font-size: 75%;
+	color: #616161;
 }
 
 /* Links */
@@ -146,17 +160,24 @@ div.field, div.actions {
   margin-bottom: 10px;
 }
 
-
 /* Error messages */
-.field_with_errors {
+/*.field_with_errors label {
   margin-top: 10px;
-  padding: 2px;
+  padding: 10px;
   background-color: red;
-  display: table;
+  display: block;
+}
+*/
+.field_with_errors input {
+  background-color : #FFB6C1;
+}
+
+.field_with_errors textarea {
+  background-color : #FFB6C1;
 }
 
 .field_with_errors label {
-  color: #fff;
+  color: red;
 }
 
 #error_explanation {
@@ -277,4 +298,55 @@ form.new_service textarea {
 	font-size:120%;
 	padding:4px 8px;
 	margin-bottom:0px;
+}
+
+/* CSS for RTI submission form */
+
+label
+{
+width: 12em;
+float: left;
+text-align: right;
+margin-right: 1.5em;
+display: block
+}
+
+.submit input
+{
+margin-left: 4.5em;
+} 
+
+input {
+color: #616161;
+background: #fee3ad;
+border: 1px solid #781351
+}
+
+textarea {
+color: #616161;
+width: 40em;
+}
+
+#request_body {
+width: 32em;
+}
+
+.submit input
+{
+color: #000;
+background: #ffa20f;
+border: 2px outset #d7b9c9
+} 
+fieldset
+{
+border: 1px solid #C1CDCD;
+width: 40em
+}
+
+legend
+{
+color: #fff;
+background: #ffa20c;
+border: 1px solid #781351;
+padding: 2px 6px
 }

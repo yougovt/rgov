@@ -2,32 +2,67 @@
 <%= form_for @request do |f| %>
   <%= render 'shared/error_messages', :object => f.object %>
 
-  <div class="field">
-  	<%= f.label :page_id, "Select the department where you want to file:" %>
-    <%= f.text_field :page_id %>  
-  </div>
 
+  <fieldset id="info_request">
+  <legend>Information requested</legend>
   <div class="field">
-	First name: <%= f.text_field :first_name %><br /> 
-	Last Name:	<%= f.text_field :last_name %><br />
-    <%= f.label :street1, "Please enter your address" %> <br />
-    <%= f.text_field :street1 %><br />
-    <%= f.text_field :street2 %><br />
-    City or Town: <%= f.text_field :city %><br />
-    PIN Code: <%= f.text_field :pin %><br />
-    District (if needed): <%= f.text_field :district %><br />
-    State: <%= f.text_field :state %><br />
+  	<%= f.label :page_id, "Select the department that has the information you need:" %>
+    <%= f.select :page_id, @pages.map {|p| [p.orgname, p.id]}, :include_blank => "Choose..." %> <br />
   </div>
+  <br /><br />
   
   <div class="field">
-  	<%= f.label :sub, "What kind of information are you requesting?" %> <br />
+  	<%= f.label :sub, "What kind of information are you requesting?" %>
     <%= f.text_field :sub %>  
   </div>
+  <br />
   <div class="field">
-  	<%= f.label :body, "Detailed questions:" %> <br />
+  	<%= f.label :body, "Detailed questions:" %>
     <%= f.text_area :body %>  
   </div>
+  </fieldset>
+
+  <fieldset>
+  <legend>Contact Information</legend>
+  	<div class="field">
+		<%= f.label :first_name %> 
+		<%= f.text_field :first_name %><br />
+	</div>
+	<div class="field">
+		<%= f.label :last_name %>
+		<%= f.text_field :last_name %><br />
+	</div>
+	<div class="field">
+		<%= f.label :email %>
+		<%= f.text_field :email %><br />
+	</div>
+	<div class="field">
+		<%= f.label :street1, "Please enter your address" %> 
+		<%= f.text_field :street1 %>
+    </div>
+    <div class="field">
+    	<%= f.text_field :street2 %>
+    </div>
+    <div class="field">
+		<%= f.label :city, 'City or Town' %>
+		<%= f.text_field :city %>
+    </div>
+    <div class="field">
+		<%= f.label :pin, 'PIN code' %>
+		<%= f.text_field :pin %>
+    </div>
+	<div class="field">
+		<%= f.label :district, 'District (if needed)' %>
+		<%= f.text_field :district %>
+	</div>
+	<div class="field">
+		<%= f.label :state %>
+		<%= f.select( :state, ApplicationHelper::STATES_LIST, :include_blank => "Choose..." ) %>
+	</div>
+  </fieldset>
+  
   <div class="actions">
     <%= f.submit "Submit" %>
   </div>
+  
 <% end %>

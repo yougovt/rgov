@@ -40,3 +40,4 @@ module SampleApp
     config.filter_parameters += [:password]
   end
 end
+

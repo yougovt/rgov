@@ -35,8 +35,21 @@ class Request < ActiveRecord::Base
 	belongs_to :user
 	
 	attr_accessible :first_name, :last_name, :street1, :street2, :pin, :city, :district, :state
-	attr_accessible :email, :type, :sub, :body, :serial_number
+	attr_accessible :email, :type, :sub, :body, :serial_number, :page_id
+	
 	
 	#build in validations for RTI request form
-
+	email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+	validates :page_id, :presence => true
+	validates :sub, :presence => true
+    validates :body, :presence => true, :length => { :minimum => 25 }
+	validates :first_name, :presence => true, :length => { :maximum => 50 }
+	validates :last_name, :presence => true, :length => { :maximum => 50 }
+	validates :email, :presence => true,
+                      :format   => { :with => email_regex }
+    validates :street1, :presence => true
+    validates :city, :presence => true
+    validates :pin, :presence => true, :numericality => true
+    validates :state, :presence => true
+    
 end

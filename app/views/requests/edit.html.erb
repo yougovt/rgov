@@ -1,0 +1,48 @@
+<h1>Verify your RTI request</h1>
+
+<p>
+If you see an error please make changes using the form below. Once you are satisfied, please click on the Submit button.
+</p>
+      
+<div id="requested info">
+	<h3 class = "content">Information request: </h3>
+      Subject: <%= @request.sub %> <br/><br />
+	  Body: <%= simple_format(@request.body) %>
+</div>
+
+<div id="address">
+	<br />
+	<h3 class = "content"> Your information will be sent to this address: </h3>
+      <%= @request.first_name %>
+      <%= @request.last_name %><br />
+      <%= @request.street1 %><br />
+      <% unless (@request.street2.empty?) %>
+      	<%= @request.street2 %><br />
+	  <% end %>
+	  <%= @request.city %>, <%=@request.state %><br />
+	  PIN: <%= @request.pin %> <br /><br />  
+</div>
+
+<div id="submit_rti">
+	  <%= link_to image_tag("submit_red.jpg", :border=>0), :action => 'show', :id => @request %> 
+	  <br /><br />
+</div>
+
+<div id="edit form">
+	<h3 class = "content">Edit your request: </h3>
+	<%= form_for(@request) do |f| %>
+  		<%= render 'shared/error_messages', :object => f.object %>
+		  <div class="field">
+			<%= f.label :sub, "What kind of information are you requesting?" %><br />
+			<%= f.text_field :sub %>
+		  </div>
+		  <div class="field">
+			<%= f.label :body, "Detailed questions:" %>
+			<%= f.text_area :body  %>
+		  </div>
+		  <div class="actions">
+			<%= f.submit "Update" %>
+		  </div>
+</div>
+
+<% end %>
