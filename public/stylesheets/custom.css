@@ -302,7 +302,7 @@ form.new_service textarea {
 
 /* CSS for RTI submission form */
 
-label
+.center_field label
 {
 width: 12em;
 float: left;

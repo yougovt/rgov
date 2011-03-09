@@ -28,15 +28,15 @@ If you see an error please make changes using the form below. Once you are satis
 	  <br /><br />
 </div>
 
-<div id="edit form">
+<div id="edit_form">
 	<h3 class = "content">Edit your request: </h3>
 	<%= form_for(@request) do |f| %>
   		<%= render 'shared/error_messages', :object => f.object %>
-		  <div class="field">
+		  <div class="center_field">
 			<%= f.label :sub, "What kind of information are you requesting?" %><br />
 			<%= f.text_field :sub %>
 		  </div>
-		  <div class="field">
+		  <div class="center_field">
 			<%= f.label :body, "Detailed questions:" %>
 			<%= f.text_area :body  %>
 		  </div>

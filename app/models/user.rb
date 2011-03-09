@@ -27,7 +27,10 @@ class User < ActiveRecord::Base
   # Automatically create the virtual attribute 'password_confirmation'.
   validates :password, :presence     => true,
                        :confirmation => true,
-                       :length       => { :within => 6..40 }
+                       :length       => { :within => 6..40 },
+                       :on => :create
+  # Removed this validation because it interferes with password reset  
+  #                    :on => :update  
 
   before_save :encrypt_password
   
@@ -65,4 +68,5 @@ class User < ActiveRecord::Base
     def secure_hash(string)
       Digest::SHA2.hexdigest(string)
     end
+
 end

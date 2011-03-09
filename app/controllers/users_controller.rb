@@ -23,6 +23,7 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     if @user.save
       sign_in @user
+      UserMailer.registration_confirmation(@user).deliver
       flash[:success] = "Welcome to rgov!"
       redirect_to @user
     else
@@ -47,6 +48,33 @@ class UsersController < ApplicationController
     end
   end
   
+  def forgot
+  if request.post?	
+  	user = User.find_by_email(params[:user][:email])
+    if user
+        user.reset_password_code_until = 1.day.from_now
+        user.reset_password_code = secure_hash( Time.now.to_s.split(//).sort_by {rand}.join )
+		user.save!
+        UserMailer.reset_notification(user).deliver
+        flash[:notice] = "Reset code sent to #{user.email}"
+      else
+        flash[:notice] = "#{params[:email]} Does not exist in system"
+      end
+      # render 'forgot'
+  	end
+  end
+  
+  def reset
+    user = User.find_by_reset_password_code(params[:reset_password_code])
+    if user && user.reset_password_code_until && Time.now < user.reset_password_code_until
+    	sign_in(user)
+    	self.current_user = user 
+    	redirect_to edit_user_path(user)
+    else
+    	redirect_to root_path
+    end
+  end
+  
   def destroy
     User.find(params[:id]).destroy
     flash[:success] = "User destroyed."
@@ -59,7 +87,9 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
       redirect_to(root_path) unless current_user?(@user)
     end
-    
-    
+
+	def secure_hash(string)
+      Digest::SHA2.hexdigest(string)
+    end
 
 end

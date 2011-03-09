@@ -20,6 +20,10 @@ SampleApp::Application.routes.draw do
   match '/help',    :to => 'pages#help'
   match '/home',    :to => 'pages#home'
   
+  # routes for password reset
+  match '/forgot',  			:to => 'users#forgot'
+  match '/reset/:reset_password_code',  	:to => 'users#reset'
+  
   # get "pages/contact"
   # get "pages/home"
   # get "pages/about"

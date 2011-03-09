@@ -1,0 +1,8 @@
+<h1>Forgot password</h1>
+<p>We will email you a link to reset your password at the
+email address that you used to sign up.</p>
+<%= form_for(:user) do |f| %>
+Please enter your email address<br/> 
+<%= f.text_field :email %><br/><br/>
+<%= f.submit 'Email password' %>
+<% end %>
