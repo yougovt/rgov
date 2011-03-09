@@ -50,6 +50,10 @@ class User < ActiveRecord::Base
     (user && user.salt == cookie_salt) ? user : nil
   end
   
+  def to_param
+	"#{id}-#{permalink}"
+  end
+  
   private
 
     def encrypt_password

@@ -39,4 +39,7 @@ class Page < ActiveRecord::Base
   		jurisdiction == 2
 	end
 	
+	def to_param
+		"#{id}-#{permalink}"
+	end
 end

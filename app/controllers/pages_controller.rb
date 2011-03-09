@@ -38,7 +38,13 @@ class PagesController < ApplicationController
   end
   
   def show
-    @agency = Page.find(params[:id])
+    if params[:permalink]
+    	@agency = Page.find_by_permalink(params[:permalink])
+    	raise ActiveRecord::RecordNotFound, "Page not found" if @agency.nil?
+    else
+	    @agency = Page.find(params[:id])
+    end
+    
     @existing_services = @agency.services 
 	@service = Service.new
     @title = @agency.orgname
@@ -65,6 +71,7 @@ class PagesController < ApplicationController
   
   def create
     @agency = Page.new(params[:page])
+    @agency.permalink = @agency.orgname.gsub(/\s/, "-").gsub(/[^\w-]/, '').downcase
     if @agency.save
       flash[:success] = "Agency added!"
       redirect_to @agency

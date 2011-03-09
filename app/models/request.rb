@@ -52,4 +52,8 @@ class Request < ActiveRecord::Base
     validates :pin, :presence => true, :numericality => true
     validates :state, :presence => true
     
+	def to_param
+		"#{id}-#{permalink}"
+  	end
+    
 end

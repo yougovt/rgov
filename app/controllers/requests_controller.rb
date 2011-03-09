@@ -16,6 +16,7 @@ class RequestsController < ApplicationController
   
   def create
     @request = Request.new(params[:request])
+	create_permalink( @request )
     #need to build email verification here for non-signed in users
     if @request.save 
       flash[:success] = "Successfully created new request! But wait, you aren't done yet..."
@@ -81,6 +82,11 @@ class RequestsController < ApplicationController
 	doc = Scribd::Document.upload(:file => '/pages/#{request.id}.pdf', :access => 'private')
 	
   end
-
+  
+  private
+  
+  def create_permalink( request )
+      request.permalink = request.sub.gsub(/\s/, "-").gsub(/[^\w-]/, '').downcase
+  end
 
 end

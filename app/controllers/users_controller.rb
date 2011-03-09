@@ -21,6 +21,7 @@ class UsersController < ApplicationController
   
   def create
     @user = User.new(params[:user])
+    @user.permalink = @user.name.gsub(/\s/, "-").gsub(/[^\w-]/, '').downcase
     if @user.save
       sign_in @user
       UserMailer.registration_confirmation(@user).deliver

@@ -24,6 +24,8 @@ SampleApp::Application.routes.draw do
   match '/forgot',  			:to => 'users#forgot'
   match '/reset/:reset_password_code',  	:to => 'users#reset'
   
+  match ':permalink', :to => 'pages#show'
+  
   # get "pages/contact"
   # get "pages/home"
   # get "pages/about"

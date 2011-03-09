@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110309042625) do
+ActiveRecord::Schema.define(:version => 20110309110440) do
 
   create_table "pages", :force => true do |t|
     t.string   "orgname"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(:version => 20110309042625) do
     t.string   "budget_year"
     t.integer  "rtiscore"
     t.string   "rtiaddress"
+    t.string   "permalink"
   end
 
   create_table "requests", :force => true do |t|
@@ -54,6 +55,7 @@ ActiveRecord::Schema.define(:version => 20110309042625) do
     t.datetime "submitdate"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "permalink"
   end
 
   create_table "services", :force => true do |t|
@@ -79,6 +81,7 @@ ActiveRecord::Schema.define(:version => 20110309042625) do
     t.datetime "reset_password_code_until"
     t.string   "email_verify_code"
     t.string   "email_verify_code_until"
+    t.string   "permalink"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
