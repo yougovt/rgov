@@ -1,6 +1,7 @@
 class RequestsController < ApplicationController
   
-  
+  before_filter :admin_user,   :only => [:destroy, :index]
+  before_filter :authenticate, :only => :index
   
   def new
     @request = Request.new
@@ -17,8 +18,13 @@ class RequestsController < ApplicationController
   def create
     @request = Request.new(params[:request])
 	create_permalink( @request )
-    #need to build email verification here for non-signed in users
+    #email verification for non-signed in users
+    @request.verification_code = secure_hash( Time.now.to_s.split(//).sort_by {rand}.join )
+	if signed_in? && current_user.verified?
+	  @request.verified = true
+	end
     if @request.save 
+      UserMailer.request_email_verification(@request).deliver unless signed_in? && current_user.verified?
       flash[:success] = "Successfully created new request! But wait, you aren't done yet..."
       redirect_to edit_request_path(@request)
     else
@@ -26,6 +32,18 @@ class RequestsController < ApplicationController
       @pages = Page.all
       @pages.sort! { |a,b| a.orgname.downcase <=> b.orgname.downcase }
       render 'new'
+    end
+  end
+  
+  def verify
+  	request = Request.find_by_verification_code(params[:verification_code])
+    if request
+    	request.verified = true
+    	request.save
+    	UserMailer.request_queued(request).deliver
+    	redirect_to request
+    else
+    	redirect_to root_path
     end
   end
   
@@ -83,10 +101,20 @@ class RequestsController < ApplicationController
 	
   end
   
+  def index
+    @title = "All requests"
+    @requests = Request.paginate(:page => params[:page])
+  end
+  
+  
   private
   
   def create_permalink( request )
       request.permalink = request.sub.gsub(/\s/, "-").gsub(/[^\w-]/, '').downcase
+  end
+  
+  def secure_hash(string)
+      Digest::SHA2.hexdigest(string)
   end
 
 end

@@ -1,0 +1,17 @@
+<li>
+  <%= link_to request.sub, :action => 'show', :id => request %>
+  <% if current_user.admin? %>
+  | <% if request.verified? && request.submitted %>
+			Request submitted
+		<% elsif request.verified?	%>
+			In Process
+		<% else %>	
+			Email verification pending
+		<% end %>
+  | <%= link_to "delete", request , :method => :delete, :confirm => "You sure?",
+                                :title => "Delete #{request.sub}" %>
+  | <%= link_to "submit", request , :method => :post, 
+  							:action => 'submit_request', :id => request %>                              
+  <% end %>
+  
+</li>

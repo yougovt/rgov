@@ -33,6 +33,7 @@ class User < ActiveRecord::Base
   #                    :on => :update  
 
   before_save :encrypt_password
+  # before_update_attributes :encrypt_password
   
   # Return true if the user's password matches the submitted password.
   def has_password?(submitted_password)

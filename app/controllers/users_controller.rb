@@ -21,6 +21,8 @@ class UsersController < ApplicationController
   
   def create
     @user = User.new(params[:user])
+    # email verification code for new users
+    @user.verification_code = secure_hash( Time.now.to_s.split(//).sort_by {rand}.join )
     @user.permalink = @user.name.gsub(/\s/, "-").gsub(/[^\w-]/, '').downcase
     if @user.save
       sign_in @user
@@ -59,7 +61,7 @@ class UsersController < ApplicationController
         UserMailer.reset_notification(user).deliver
         flash[:notice] = "Reset code sent to #{user.email}"
       else
-        flash[:notice] = "#{params[:email]} Does not exist in system"
+        flash[:notice] = "#{params[:user][:email]} does not exist in system"
       end
       # render 'forgot'
   	end
@@ -80,6 +82,17 @@ class UsersController < ApplicationController
     User.find(params[:id]).destroy
     flash[:success] = "User destroyed."
     redirect_to users_path
+  end
+  
+  def verify
+  	user = User.find_by_verification_code(params[:verification_code])
+    if user
+    	user.verified = true
+    	user.save
+    	redirect_to user
+    else
+    	redirect_to root_path
+    end
   end
 
   private

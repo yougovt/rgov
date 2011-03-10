@@ -7,8 +7,11 @@
       </h1>
     </td>
     <td class="sidebar round">
-      <strong>Name</strong> <%= @user.name %><br />
-      <strong>URL</strong>  <%= link_to user_path(@user), @user %><br />
+      <strong>Name</strong> <%= @user.name %><br /><br />
+      <% unless @user.verified? %>
+		<b><p style="color: red">Email not verified</p></b>  
+      <% end %>
+      <br/>
       <%= link_to 'Edit Profile', edit_user_path(@user) %>
     </td>
   </tr>

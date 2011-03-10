@@ -55,5 +55,16 @@ class Request < ActiveRecord::Base
 	def to_param
 		"#{id}-#{permalink}"
   	end
+  	
+  	# need to figure out a way to change the status to 
+  	# submitted from the UI
+  	# def self.submit_request
+  	#	request = find_by_id(id)
+  	#	if request.verified?
+  	#		request.submitted = true
+  	#		request.save
+  	#		UserMailer.request_submitted(request).deliver
+  	#	end
+    # end
     
 end

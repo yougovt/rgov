@@ -23,6 +23,8 @@ SampleApp::Application.routes.draw do
   # routes for password reset
   match '/forgot',  			:to => 'users#forgot'
   match '/reset/:reset_password_code',  	:to => 'users#reset'
+  match '/verify-request/:verification_code',  	:to => 'requests#verify'
+  match '/verify-user/:verification_code',  	:to => 'users#verify'
   
   match ':permalink', :to => 'pages#show'
   

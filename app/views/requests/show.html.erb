@@ -49,6 +49,14 @@
     <td class="sidebar round">
 		<h3>Status</h3>
 		
+		<% if @request.verified? && @request.submitted %>
+			<b><p style="color: green">Request submitted</p></b>
+		<% elsif @request.verified?	%>
+			<b><p>In Process</p></b>
+		<% else %>	
+			<b><p style="color: red">Email verification pending</p></b>
+		<% end %> 
+		
 		Request submitted on: <br/>
 		<strong><%= @request.created_at.strftime("%d %b %Y") %> <br/>
 		<% appealdate = @request.created_at + 35.days %></strong>

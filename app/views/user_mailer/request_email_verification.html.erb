@@ -1,13 +1,13 @@
-<%= @user.name %>,
+<%= @request.first_name %>,
 <br/><br/>
-Thank you for registering!
+Thank you for submitting an RTI request!
 <br/><br/>
 Please click on the link below to confirm your email address:
 <br/>
-www.rgov.in/verify-user/<%= @user.verification_code %>
+www.rgov.in/verify-request/<%= @request.verification_code %>
 <br/><br/>
-
-<%= link_to "Submit an RTI now", "http://www.rgov.in/requests/new" %> 
+<i>Your request will not be filed unless you confirm your 
+email address by clicking on the above link.</i>
 <br/><br/>
 If you need further assistance, please reply to this email.
 <br/><br/>

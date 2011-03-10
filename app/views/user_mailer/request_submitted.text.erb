@@ -1,0 +1,16 @@
+<%= @request.first_name %>,
+
+Your RTI request has been submitted to the @agency.orgname on @request.submitdate.strftime("%d %b %Y") at @request.submitdate.strftime("%I:%M %p").
+
+You can view the status of your RTI request and download a PDF copy of your request letter for your records by clicking on this link:
+www.rgov.in<%= request_path(@request) %>
+
+<%= link_to "File another RTI", "www.rgov.in" %>
+
+If you need further assistance, please reply to this email.
+
+Best regards,
+
+-rGov team
+
+www.rgov.in

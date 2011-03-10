@@ -1,0 +1,17 @@
+<%= @request.first_name %>,
+<br/><br/>
+We have received your RTI request and it has been added to our queue. We will send you another email once your request has been submitted to the concerned government department.
+<br/><br/>
+You can view the status of your RTI request and download a PDF copy of your request letter for your records by clicking on this link:
+<br/>
+www.rgov.in<%= request_path(@request) %>
+<br/><br/>
+<%= link_to "File another RTI", "www.rgov.in" %>
+<br/><br/>
+If you need further assistance, please reply to this email.
+<br/><br/>
+Best regards,
+<br/><br/>
+-rGov team
+<br/><br/>
+www.rgov.in
