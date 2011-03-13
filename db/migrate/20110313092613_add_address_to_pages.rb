@@ -8,6 +8,7 @@ class AddAddressToPages < ActiveRecord::Migration
   	add_column :pages, :rti_payable_at, :string
   	add_column :pages, :rti_amount, :integer
   end
+  def self.down
   	remove_column :pages, :street1
   	remove_column :pages, :street2
   	remove_column :pages, :pin
@@ -15,6 +16,5 @@ class AddAddressToPages < ActiveRecord::Migration
   	remove_column :pages, :rti_payee
   	remove_column :pages, :rti_payable_at
   	remove_column :pages, :rti_amount
-  def self.down
   end
 end
