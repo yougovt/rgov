@@ -1,16 +1,23 @@
 # == Schema Information
-# Schema version: 20110217032915
+# Schema version: 20110313092613
 #
 # Table name: users
 #
-#  id                 :integer         not null, primary key
-#  name               :string(255)
-#  email              :string(255)
-#  created_at         :datetime
-#  updated_at         :datetime
-#  encrypted_password :string(255)
-#  salt               :string(255)
-#  admin              :boolean
+#  id                        :integer         not null, primary key
+#  name                      :string(255)
+#  email                     :string(255)
+#  created_at                :datetime
+#  updated_at                :datetime
+#  encrypted_password        :string(255)
+#  salt                      :string(255)
+#  admin                     :boolean
+#  reset_password_code       :string(255)
+#  reset_password_code_until :datetime
+#  email_verify_code         :string(255)
+#  email_verify_code_until   :string(255)
+#  permalink                 :string(255)
+#  verification_code         :string(255)
+#  verified                  :boolean
 #
 
 require 'digest'

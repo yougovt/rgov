@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110310090719) do
+ActiveRecord::Schema.define(:version => 20110313092613) do
 
   create_table "pages", :force => true do |t|
     t.string   "orgname"
@@ -28,6 +28,13 @@ ActiveRecord::Schema.define(:version => 20110310090719) do
     t.integer  "rtiscore"
     t.string   "rtiaddress"
     t.string   "permalink"
+    t.string   "street1"
+    t.string   "street2"
+    t.integer  "pin"
+    t.string   "district"
+    t.string   "rti_payee"
+    t.string   "rti_payable_at"
+    t.integer  "rti_amount"
   end
 
   create_table "requests", :force => true do |t|

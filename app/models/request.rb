@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110227211623
+# Schema version: 20110313092613
 #
 # Table name: requests
 #
@@ -28,6 +28,8 @@
 #  submitdate            :datetime
 #  created_at            :datetime
 #  updated_at            :datetime
+#  permalink             :string(255)
+#  verification_code     :string(255)
 #
 
 class Request < ActiveRecord::Base

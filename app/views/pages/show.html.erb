@@ -26,6 +26,20 @@
         </table>
       <% end %>
       </div>
+      
+      <% if @agency.street1 %>
+      <div>   
+      <h3>Address:</h3>
+	  <%= @agency.street1 %><br/>
+	  <%= @agency.street2 if @agency.street2 %><br/>
+   	  <%= @agency.city %> 
+   	  <%= ", #{@agency.district}" unless @agency.district.empty? %>
+   	  <%= ", #{@agency.state}" %><br/>
+   	  PIN: <%= @agency.pin %>
+   	  <br/><br/>
+   	  </div>
+   	  <% end %>
+      
 		
 	  <h3>Add a service:</h3>
       <% form_for @service, :remote => true, :html => { :id => "add_service_form" } do |f| %>
