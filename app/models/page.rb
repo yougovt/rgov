@@ -40,7 +40,7 @@ class Page < ActiveRecord::Base
 	validates :orgname, :presence => true
 	validates :city, :presence => true, :if => :is_city_agency?
 	validates :state, :presence => true, :if => :is_state_agency?
-	validates :pin, :presence => true, :numericality => true
+	validates :pin, :numericality => true
 	
 	def is_city_agency?
   		jurisdiction == 1
