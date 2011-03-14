@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110313092613) do
+ActiveRecord::Schema.define(:version => 20110314221420) do
 
   create_table "pages", :force => true do |t|
     t.string   "orgname"
@@ -64,6 +64,12 @@ ActiveRecord::Schema.define(:version => 20110313092613) do
     t.datetime "updated_at"
     t.string   "permalink"
     t.string   "verification_code"
+    t.integer  "docID"
+    t.string   "access_key"
+    t.string   "letter_type"
+    t.string   "access"
+    t.string   "secret_password"
+    t.boolean  "uneditable"
   end
 
   create_table "services", :force => true do |t|
@@ -92,6 +98,8 @@ ActiveRecord::Schema.define(:version => 20110313092613) do
     t.string   "permalink"
     t.string   "verification_code"
     t.boolean  "verified"
+    t.integer  "fb_user_id"
+    t.string   "email_hash"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

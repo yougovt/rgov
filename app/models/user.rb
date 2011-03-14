@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110313092613
+# Schema version: 20110314210353
 #
 # Table name: users
 #
@@ -18,6 +18,8 @@
 #  permalink                 :string(255)
 #  verification_code         :string(255)
 #  verified                  :boolean
+#  fb_user_id                :integer
+#  email_hash                :string(255)
 #
 
 require 'digest'

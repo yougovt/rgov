@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110313092613
+# Schema version: 20110314210353
 #
 # Table name: requests
 #
@@ -30,6 +30,11 @@
 #  updated_at            :datetime
 #  permalink             :string(255)
 #  verification_code     :string(255)
+#  docID                 :integer
+#  access_key            :string(255)
+#  letter_type           :string(255)
+#  access                :string(255)
+#  secret_password       :string(255)
 #
 
 class Request < ActiveRecord::Base
@@ -38,7 +43,7 @@ class Request < ActiveRecord::Base
 	
 	attr_accessible :first_name, :last_name, :street1, :street2, :pin, :city, :district, :state
 	attr_accessible :email, :type, :sub, :body, :serial_number, :page_id
-	
+	attr_accessible :uneditable, :docID, :access_key, :secret_password
 	
 	#build in validations for RTI request form
 	email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

@@ -49,6 +49,13 @@ class RequestsController < ApplicationController
   
   def show
     @request = Request.find(params[:id])
+    # if @request.uneditable.nil?
+    #	@request.uneditable = true 
+    #	@request.save!
+    # end
+
+    upload( @request) unless @request.docID
+
     @agency = Page.find_by_id(@request.page_id)
     @allagencies = Page.all 
     @title = @request.sub
@@ -59,13 +66,12 @@ class RequestsController < ApplicationController
       :right_margin => 50,
       :top_margin => 40,
       :bottom_margin => 24}, 
-      :filename=>"#{@request.id}.pdf" 
+      :filename=>"#{@request.id}-#{@request.permalink}.pdf" 
     
    # respond_to do |format|
    # 	format.html
    # 	format.pdf
-   # end
-    
+   # end    
   end
   
   def destroy
@@ -76,8 +82,13 @@ class RequestsController < ApplicationController
   end
   
   def edit
-  	@title = "Edit your RTI request..."
   	@request = Request.find(params[:id])
+  	if @request.uneditable?
+  		@title = "Edit your RTI request..."
+  		redirect_to root_path
+  	else
+  		@title = "Edit your RTI request..."
+  	end		
   end
   
   def update
@@ -93,11 +104,19 @@ class RequestsController < ApplicationController
   end 
   
   def upload(request)
-  	Scribd::API.instance.key = '6r2zurc4lhjgovi2czrt3'
-	Scribd::API.instance.secret = 'sec-2as20tof0tzq23jklykcws2wqc'
-	Scribd::User.login 'info@yougovt.in', 'govster'
+  	response = RestClient.get 'api.scribd.com/api', {:params => {:method => 'docs.uploadFromUrl', :api_key => '6r2zurc4lhjgovi2czrt3', :url => 'www.rgov.in/requests/#{request.id}-#{request.permalink}.pdf', :doc_type => 'pdf', :access => 'private'}} 
+  	if response
+  		doc = Nokogiri::XML(response)
+  		request.access_key = doc.xpath('.//rsp/access_key').text
+  		request.secret_password = doc.xpath('.//rsp/secret_password').text
+  		request.docID = doc.xpath('.//rsp/doc_id').text
+  		request.save
+  	end
+  	# Scribd::API.instance.key = '6r2zurc4lhjgovi2czrt3'
+	# Scribd::API.instance.secret = 'sec-2as20tof0tzq23jklykcws2wqc'
+	# Scribd::User.login 'info@yougovt.in', 'govster'
 	
-	doc = Scribd::Document.upload(:file => '/pages/#{request.id}.pdf', :access => 'private')
+	# doc = Scribd::Document.upload(:file => '/pages/#{request.id}.pdf', :access => 'private')
 	
   end
   

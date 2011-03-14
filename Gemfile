@@ -6,6 +6,8 @@ gem 'will_paginate', '3.0.pre2'
 gem 'prawn', '0.8.4'
 gem 'prawnto', '0.0.4'
 gem 'rscribd'
+gem 'nokogiri'
+gem 'rest-client'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

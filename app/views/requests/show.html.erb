@@ -12,8 +12,7 @@
 		<div id='embedded_flash'><a href="http://www.scribd.com">Scribd</a></div>
 		
 		<script type="text/javascript">
-		var scribd_doc = scribd.Document.getDoc(50231986, 'key-pcseqd598ncggzkuhdj');
-		
+		var scribd_doc = scribd.Document.getDoc( <%= "#{@request.docID}" %>, <%= "'#{@request.access_key}'" %>);
 		var oniPaperReady = function(e){
 		// scribd_doc.api.setPage(3);
 		}
