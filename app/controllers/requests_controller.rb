@@ -103,14 +103,14 @@ class RequestsController < ApplicationController
     end
   end 
   
-  def upload(@request)
-  	response = RestClient.get 'api.scribd.com/api', {:params => {:method => 'docs.uploadFromUrl', :api_key => '6r2zurc4lhjgovi2czrt3', :url => 'www.rgov.in/requests/#{@request.id}-#{@request.permalink}.pdf', :doc_type => 'pdf', :access => 'private'}} 
+  def upload(req)
+  	response = RestClient.get 'api.scribd.com/api', {:params => {:method => 'docs.uploadFromUrl', :api_key => '6r2zurc4lhjgovi2czrt3', :url => 'www.rgov.in/requests/#{req.id}-#{req.permalink}.pdf', :doc_type => 'pdf', :access => 'private'}} 
   	if response
   		doc = Nokogiri::XML(response)
-  		@request.access_key = doc.xpath('.//rsp/access_key').text
-  		@request.secret_password = doc.xpath('.//rsp/secret_password').text
-  		@request.docID = doc.xpath('.//rsp/doc_id').text
-  		@request.save
+  		req.access_key = doc.xpath('.//rsp/access_key').text
+  		req.secret_password = doc.xpath('.//rsp/secret_password').text
+  		req.docID = doc.xpath('.//rsp/doc_id').text
+  		req.save
   	end
   	# Scribd::API.instance.key = '6r2zurc4lhjgovi2czrt3'
 	# Scribd::API.instance.secret = 'sec-2as20tof0tzq23jklykcws2wqc'
