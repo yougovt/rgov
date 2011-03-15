@@ -104,7 +104,8 @@ class RequestsController < ApplicationController
   end 
   
   def upload(req)
-  	response = RestClient.get 'api.scribd.com/api', {:params => {:method => 'docs.uploadFromUrl', :api_key => '6r2zurc4lhjgovi2czrt3', :url => 'www.rgov.in/requests/#{req.id}-#{req.permalink}.pdf', :doc_type => 'pdf', :access => 'private'}} 
+  	# Found this issue -- heroku's web server -- nginx -- required double quote use to interpret objects
+  	response = RestClient.get 'api.scribd.com/api', {:params => {:method => 'docs.uploadFromUrl', :api_key => '6r2zurc4lhjgovi2czrt3', :url => "www.rgov.in/requests/#{req.id}-#{req.permalink}.pdf", :doc_type => 'pdf', :access => 'private'}} 
   	if response
   		doc = Nokogiri::XML(response)
   		req.access_key = doc.xpath('.//rsp/access_key').text
